@@ -9,3 +9,12 @@ variable "harness_api_key" {
 variable "project_name" {
   type        = string
 }
+
+variable "project_identifier" {
+  type        = string
+}
+
+variable "org_id" {
+  type        = string
+  default     = "default"
+}
