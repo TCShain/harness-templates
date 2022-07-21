@@ -6,6 +6,6 @@ resource "harness_platform_environment" "rapid_environment" {
   description = "Rapid Lab Harness Template Project"
 
   tags = [
-    "harness_template:rapid_lab"
+    var.rapid_lab_tag
   ]
 }
