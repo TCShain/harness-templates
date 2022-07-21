@@ -25,21 +25,26 @@ variable "org_id" {
 }
 
 variable "environment_name" {
-  type = string
+  type    = string
+  default = "lab"
 }
 
 variable "environment_identifier" {
-  type = string
+  type    = string
+  default = "lab"
 }
 
 variable "environment_type" {
-  type = string
+  type    = string
+  default = "PreProduction"
 }
 
 variable "service_name" {
-  type = string
+  type    = string
+  default = "lab_service"
 }
 
 variable "service_identifier" {
-  type = string
+  type    = string
+  default = "lab_service"
 }
