@@ -1,6 +1,6 @@
 ## Cloud Providers and Connectors
-module "public_git_repo" "use_case_library_repo" {
-    source = "github.com/TCShain/harness-templates.git?ref=main"
+module "use_case_library_repo" {
+    source = "github.com/TCShain/harness-templates.git//cg/terraform/modules/connectors/public_git_repo?ref=main"
 
     account_id         = var.account_id
     api_key            = var.api_key
