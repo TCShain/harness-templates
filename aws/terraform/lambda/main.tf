@@ -2,7 +2,7 @@ resource "aws_lambda_function" "test_lambda" {
   # If the file is not in the current working directory you will need to include a
   # path.module in the filename.
   #filename      = "lambda_function_payload.zip"
-  function_name = "tshain_test_lambda"
+  function_name = "${var.env}-${var.infra}-${var.svc}-lambda"
   role          = aws_iam_role.iam_for_lambda.arn
   handler       = "index.handler"
   package_type  = "Zip"
