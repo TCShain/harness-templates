@@ -9,14 +9,14 @@ variable "name" {
 }
 
 
-## Harness Variables
-variable "account_id" {
-    type = string
-}
+# ## Harness Variables
+# variable "account_id" {
+#     type = string
+# }
 
-variable "api_key" {
-    type = string
-}
+# variable "api_key" {
+#     type = string
+# }
 
 
 ## Git Repo Variables
