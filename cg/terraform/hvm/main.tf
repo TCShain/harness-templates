@@ -42,7 +42,7 @@ resource "harness_infrastructure_definition" "k8s" {
   datacenter_ssh {
     cloud_provider_name             = harness_cloudprovider_datacenter.use_case_library_cp.name
     host_connection_attributes_name = "dev"
-    hostnames                       = "$${service.name}"
+    hostnames                       = ["localhost"]
   }
 }
 
