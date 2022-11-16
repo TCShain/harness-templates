@@ -1,5 +1,5 @@
 resource "harness_yaml_config" "deployment_svc_cmd" {
-  path    = "${var.hvm_path}/${var.name}/deployment_svc_cmd.yaml"
+  path    = "${var.harness_path}/${var.name}/deploy_lambda.yaml"
   content = <<EOF
 harnessApiVersion: '1.0'
 type: SSH

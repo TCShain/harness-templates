@@ -1,50 +1,90 @@
-variable "harness_account_id" {
-  type = string
-}
+# ## API Variables
+# variable "harness_api_key" {
+#   type = string
+# }
 
-variable "harness_api_key" {
-  type = string
-}
+# variable "harness_account_id" {
+#   type = string
+# }
 
-variable "rapid_lab_tag" {
-  type    = string
-  default = "harness_template:rapid_lab"
-}
 
-variable "project_name" {
-  type = string
-}
+# ## TOP-LEVEL Variables
+# variable "org" {
+#   type    = string
+#   default = "rapid_org"
+# }
 
-variable "project_identifier" {
-  type = string
-}
+# variable "rapid_lab_tags" {
+#   type    = list(string)
+#   default = ["harness_template:rapid_lab"]
+# }
 
-variable "org_id" {
-  type    = string
-  default = "default"
-}
 
-variable "environment_name" {
-  type    = string
-  default = "lab"
-}
+# ## PROJECT Variables
+# variable "project_name" {
+#   type    = string
+#   default = "rapid_project"
+# }
 
-variable "environment_identifier" {
-  type    = string
-  default = "lab"
-}
+# variable "project_identifier" {
+#   type = string
+#   default = "rapid_project"
+# }
 
-variable "environment_type" {
-  type    = string
-  default = "PreProduction"
-}
 
-variable "service_name" {
-  type    = string
-  default = "lab_service"
-}
+# ## ENVIRONMENT Variables
+# variable "environment_name" {
+#   type    = string
+#   default = "rapid_lab_env"
+# }
 
-variable "service_identifier" {
-  type    = string
-  default = "lab_service"
-}
+# variable "environment_identifier" {
+#   type    = string
+#   default = "rapid_lab_env"
+# }
+
+# variable "environment_type" {
+#   type    = string
+#   default = "PreProduction"
+# }
+
+
+# ## SERVICE Variables
+# variable "service_name" {
+#   type    = string
+#   default = "rapid_service"
+# }
+
+# variable "service_identifier" {
+#   type    = string
+#   default = "rapid_service"
+# }
+
+# ## USER_GROUP Variables
+
+# variable "user_group_name" {
+#   type    = string
+#   default = "rapid_user_group"
+# }
+
+# variable "user_group_identifier" {
+#   type    = string
+#   default = "rapid_user_group"
+# }
+
+# variable "user_group_email" {
+#   type    = string
+#   default = "user_group@email.com"
+# }
+
+# ## RESOURCE_GROUP Variables
+
+# variable "resource_group_name" {
+#   type    = string
+#   default = "rapid_resource_group"
+# }
+
+# variable "resource_group_identifier" {
+#   type    = string
+#   default = "rapid_resource_group"
+# }
