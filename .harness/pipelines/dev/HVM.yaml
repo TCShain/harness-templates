@@ -1,0 +1,60 @@
+pipeline:
+  name: HVM
+  identifier: HVM
+  projectIdentifier: Scratch_Lab
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: Deploy
+        identifier: Deploy
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: Kubernetes
+          service:
+            serviceRef: <+input>
+            serviceInputs: <+input>
+          environment:
+            environmentRef: <+input>
+            deployToAll: false
+            environmentInputs: <+input>
+            infrastructureDefinitions: <+input>
+          execution:
+            steps:
+              - step:
+                  type: TerraformPlan
+                  name: TF Plan
+                  identifier: TF_Plan
+                  spec:
+                    configuration:
+                      command: Apply
+                      configFiles:
+                        store:
+                          type: Github
+                          spec:
+                            gitFetchType: Branch
+                            connectorRef: account.TCShain_GitHub
+                            repoName: harness-templates
+                            branch: main
+                            folderPath: ng/terraform/<+pipeline.variables.use_case>
+                      secretManagerRef: harnessSecretManager
+                    provisionerIdentifier: tf_<+service.name>_<+env.name>
+                  timeout: 10m
+              - step:
+                  type: TerraformApply
+                  name: TF Apply
+                  identifier: TF_Apply
+                  spec:
+                    configuration:
+                      type: InheritFromPlan
+                    provisionerIdentifier: tf_<+service.name>_<+env.name>
+                  timeout: 10m
+            rollbackSteps: []
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
