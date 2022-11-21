@@ -5,7 +5,9 @@ variable "env" {
 }
 
 variable "name" {
-    type = string
+    type        = string
+    description = "Name of the Custom Deployment Type"
+    default     = "custom-lambda-artifact-only"
 }
 
 
@@ -18,8 +20,14 @@ variable "api_key" {
     type = string
 }
 
-variable "hvm_path" {
+variable "harness_path" {
     type = string
     default = "Setup/Template Library/Taylor Shain/HVM"
     description = "The target account's Template Library Path"
+}
+
+variable "short_harness_path" {
+    type = string
+    default = "Taylor Shain/HVM"
+    description = "The short path to the target account's Template Library Path"
 }

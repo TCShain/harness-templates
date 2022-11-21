@@ -1,5 +1,5 @@
-resource "harness_yaml_config" "custom_deployment_template" {
-  path    = "${var.hvm_path}/${var.name}/custom_deployment.yaml"
+resource "harness_yaml_config" "custom_lambda_deployment" {
+  path    = "${var.harness_path}/${var.name}/custom_lambda_deployment.yaml"
   content = <<EOF
 harnessApiVersion: '1.0'
 type: CUSTOM_DEPLOYMENT_TYPE
@@ -9,6 +9,7 @@ fetchInstanceScript: |-
 
   echo "[" > $${INSTANCE_OUTPUT_PATH}
   aws lambda get-function --function-name $${env.name}-$${infra.name}-$${service.name}-lambda --region $${infra.custom.vars.region} >> $${INSTANCE_OUTPUT_PATH}
+
   echo "]" >> $${INSTANCE_OUTPUT_PATH}
 
   echo "---------------------------------------------"
