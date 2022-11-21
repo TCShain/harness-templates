@@ -10,15 +10,12 @@ variable "project_name" {
 }
 
 variable "rapid_lab_tags" {
-  type    = list(string)
+  type    = optional(list(string))
   default = ["harness_template:rapid_lab"]
 }
 
-## SERVICE Variables
-variable "services" {
-  type = list(object({
-    name                 = string
-    svc_type             = string
-    artifact_source_type = string
-  }))
+
+## PROJECT Variables
+variable "description" {
+  type = optional(string)
 }

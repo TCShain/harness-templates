@@ -16,14 +16,8 @@ variable "rapid_lab_tags" {
 
 ## ENVIRONMENT Variables
 variable "environments" {
-  default = {
-    "one": {
-        "name": "rapid_lab_env_1",
-        "type": "PreProduction"
-    },
-    "two": {
-        "name": "rapid_lab_env_2",
-        "type": "Production"
-    }
-  }
+  type = list(object({
+    name = string
+    type = string
+  }))
 }

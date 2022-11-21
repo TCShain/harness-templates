@@ -1,12 +1,12 @@
 ## TOP-LEVEL Variables
 variable "org_name" {
   type    = string
-  default = "rapid_org"
+  default = ""
 }
 
 variable "project_name" {
   type    = string
-  default = "rapid_project"
+  default = ""
 }
 
 variable "rapid_lab_tags" {
@@ -19,37 +19,26 @@ variable "account_id" {
   default = ""
 }
 
-# ## USER_GROUP Variables
-# variable "user_groups" {
-#   default = {
-#     "one": {
-#         "name": "rapid_lab_env_1",
-#         "type": "PreProduction"
-#     },
-#     "two": {
-#         "name": "rapid_lab_env_2",
-#         "type": "Production"
-#     }
-#   }
-# }
+variable "level" {
+  type = string
+}
 
-## RESOURCE_GROUP Variables
-# variable "resource_groups" {
-#   default = {
-#     # "one": {
-#     #     "name"      : "rapid_lab_rg_1",
-#     #     "org_id"    : "rapid_org"
-#     #     "project_id": ""
-#     #     "allowed_scope_levels": ["org"]
-#     # },
-#     "two": {
-#         "name"      : "rapid_lab_rg_2",
-#         "org_id"    : "rapid_org",
-#         "project_id": "rapid_project",
-#         "allowed_scope_levels": ["project"]
-#     }
-#   }
-# }
-
+# RESOURCE_GROUP Variables
 variable "resource_groups" {
+  type = list(object({
+    name                 = string
+    description          = optional(string)
+    org_id               = optional(string)
+    project_id           = optional(string)
+    scope_filter         = string
+    allowed_scope_levels = optional(list(string))
+    resources            = list(object({
+      resource_type    = string
+      identifiers      = optional(list(string))
+      attribute_filter = optional(list(object({
+        attribute_name   = optional(string)
+        attribute_values = optional(list(string))
+      })))
+    }))
+  }))
 }

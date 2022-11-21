@@ -1,0 +1,45 @@
+service:
+  name: svc_with_inputs
+  identifier: svc_with_inputs
+  tags: {}
+  serviceDefinition:
+    spec:
+      manifests:
+        - manifest:
+            identifier: serverless
+            type: ServerlessAwsLambda
+            spec:
+              store:
+                type: Github
+                spec:
+                  connectorRef: <+input>
+                  gitFetchType: Branch
+                  paths: <+input>
+                  repoName: <+input>
+                  branch: <+input>
+              configOverridePath: <+input>
+      configFiles:
+        - configFile:
+            identifier: configFile1
+            spec:
+              store:
+                type: Harness
+                spec:
+                  files:
+                    - <+org.description>
+      artifacts:
+        primary:
+          spec:
+            connectorRef: <+input>
+            imagePath: <+input>
+            tag: <+input>
+            region: <+input>
+          type: ${as_type}
+      variables:
+        - name: var1
+          type: String
+          value: val1
+        - name: var2
+          type: String
+          value: val2
+    type: ServerlessAwsLambda

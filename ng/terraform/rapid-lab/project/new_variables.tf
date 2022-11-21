@@ -10,12 +10,16 @@ variable "harness_account_id" {
 ## TOP-LEVEL Variables
 variable "org_name" {
   type    = string
-  default = "rapid_org"
+  default = ""
 }
 
 variable "project_name" {
   type    = string
-  default = "rapid_project"
+  default = ""
+}
+
+variable "level" {
+  type = string
 }
 
 variable "rapid_lab_tags" {
@@ -42,30 +46,10 @@ variable "resource_group_name" {
 
 ## ENVIRONMENT Variables
 variable "environments" {
-  default = {
-    "one": {
-        "name": "rapid_lab_env_1",
-        "type": "PreProduction"
-    },
-    "two": {
-        "name": "rapid_lab_env_2",
-        "type": "Production"
-    }
-  }
 }
 
 ## SERVICE Variables
 variable "services" {
-  default = {
-    "one": {
-        "name": "rapid_lab_env_1",
-        "type": "PreProduction"
-    },
-    "two": {
-        "name": "rapid_lab_env_2",
-        "type": "Production"
-    }
-  }
 }
 
 ## CONNECTOR Variables
@@ -100,4 +84,21 @@ variable "secrets" {
         "type": "Production"
     }
   }
+}
+
+# RBAC Variables
+## RESOURCE_GROUP Variables
+variable "resource_groups" {
+}
+
+## USER_GROUP Variables
+variable "user_groups" {
+}
+
+## ROLE Variables
+variable "roles" {
+}
+
+## ROLE_ASSIGNEMNT Variables
+variable "role_assignments" {
 }
