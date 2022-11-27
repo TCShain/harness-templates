@@ -1,0 +1,7 @@
+- resource_type: VARIABLE
+- resource_type: TEMPLATE
+- resource_type: FILE
+- resource_type: DEPLOYMENTFREEZE
+- resource_type: DELEGATECONFIGURATION
+- resource_type: SECRET
+- resource_type: DELEGATE

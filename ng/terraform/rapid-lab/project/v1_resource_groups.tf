@@ -1,9 +1,11 @@
-
 module "resource_groups" {
   source     = "../../modules/rbac/resource_group"
   depends_on = [
     module.environments,
-    resource.harness_platform_project.rapid_project
+    resource.harness_platform_project.rapid_project,
+    module.services,
+    module.roles,
+    module.user_groups
   ]
 
   account_id     = var.harness_account_id
@@ -12,6 +14,11 @@ module "resource_groups" {
   level          = var.level
   rapid_lab_tags = var.rapid_lab_tags
   
-  resource_groups = var.resource_groups
+  resource_groups = local.rg_yaml
 
+}
+
+locals {
+  path = "/Users/taylorshain/Documents/repos/harness-templates/ng/terraform/rapid-lab/tfvars/projects/rapid-project/yaml"
+  rg_yaml = [for f in fileset("${local.path}", "*.yaml") : yamldecode(file("${local.path}/${f}"))]
 }

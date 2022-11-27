@@ -1,3 +1,9 @@
+# ## EXECUTION Variables
+# variable "yaml_path" {
+#   type    = string
+#   default = "${path.root}/yaml"
+# }
+
 ## API Variables
 variable "harness_api_key" {
   type = string
@@ -25,23 +31,6 @@ variable "level" {
 variable "rapid_lab_tags" {
   type    = list(string)
   default = ["harness_template:rapid_lab"]
-}
-
-## USER_GROUP Variables
-variable "user_group_name" {
-  type    = string
-  default = "rapid_user_group"
-}
-
-variable "user_group_email" {
-  type    = string
-  default = "user_group@email.com"
-}
-
-## RESOURCE_GROUP Variables
-variable "resource_group_name" {
-  type    = string
-  default = "rapid_resource_group"
 }
 
 ## ENVIRONMENT Variables
@@ -88,8 +77,16 @@ variable "secrets" {
 
 # RBAC Variables
 ## RESOURCE_GROUP Variables
-variable "resource_groups" {
-}
+# variable "resource_groups" {
+# }
+
+# variable "rg_type_sets" {
+#   type = list(string)
+#   default = [
+#     "shared",
+#     "gitops"
+#   ]
+# }
 
 ## USER_GROUP Variables
 variable "user_groups" {

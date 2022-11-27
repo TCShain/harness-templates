@@ -1,0 +1,25 @@
+---
+name: rg_ts_experiments3
+scope_filter: EXCLUDING_CHILD_SCOPES
+## Toggle all the Resource Types in a set
+resource_sets:
+- "ADMINISTRATIVE_FUNCTIONS"
+- "CHAOS"
+- "GITOPS"
+- "ENVIRONMENT_GROUP"
+- "SHARED_RESOURCES"
+- "SERVICE_RELIABILITY"
+- "PIPELINES"
+- "SERVICES"
+## Toggle individual Resource Types, or Resource Types with Attribute Filters/Identifier List 
+resources:
+- resource_type: ENVIRONMENT ### EXAMPLE: Simple, individual toggle
+- resource_type: CONNECTOR ### EXAMPLE: Attribute Filter
+  attribute_filter:
+  - attribute_name: category
+    attribute_values:
+    - CODE_REPO
+    - ARTIFACTORY
+- resource_type: USERGROUP ### EXAMPLE: Identifier
+  identifiers:
+  - developer

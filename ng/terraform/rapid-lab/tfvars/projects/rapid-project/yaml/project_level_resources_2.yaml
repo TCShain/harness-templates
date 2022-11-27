@@ -1,0 +1,16 @@
+---
+name: rg_ts_experiments2
+scope_filter: EXCLUDING_CHILD_SCOPES
+## Toggle all Resource Types in a set
+resource_sets:
+- "CHAOS"
+- "PIPELINES"
+## Toggle individual Resource Types, or Resource Types with Attribute Filters/Identifier List 
+resources:
+- resource_type: ENVIRONMENT
+  identifiers:
+  - qa
+  - stage
+- resource_type: CONNECTOR
+  identifiers:
+  - harnessSecretManager

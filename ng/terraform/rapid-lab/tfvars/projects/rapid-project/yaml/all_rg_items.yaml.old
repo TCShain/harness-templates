@@ -1,0 +1,58 @@
+---
+description: All ResourceGroup Items
+name: all_rg_items
+scope_filter: EXCLUDING_CHILD_SCOPES
+resources:
+### ADMINISTRATIVE
+- resource_type: RESOURCEGROUP
+- resource_type: SERVICEACCOUNT
+- resource_type: ROLE
+- resource_type: SETTING
+- resource_type: USER
+- resource_type: AUTHSETTING
+- resource_type: USERGROUP
+### ENVIRONMENT
+- resource_type: ENVIRONMENT
+  attribute_filter:
+  - attribute_name: type
+    attribute_values:
+    - PreProduction
+### CHAOS
+- resource_type: CHAOS_HUB
+- resource_type: CHAOS_EXPERIMENT
+- resource_type: CHAOS_INFRASTRUCTURE
+- resource_type: CHAOS_GAMEDAY
+### GITOPS
+# - resource_type: GITOPS_CLUSTER
+# - resource_type: GITOPS_AGENT
+# - resource_type: GITOPS_CERT
+# - resource_type: GITOPS_APP
+# - resource_type: GITOPS_REPOSITORY
+# - resource_type: GITOPS_GPGKEY
+# - resource_type: ENVIRONMENT_GROUP
+### SHARED RESOURCES
+- resource_type: VARIABLE
+- resource_type: TEMPLATE
+- resource_type: FILE
+- resource_type: DASHBOARDS
+- resource_type: DEPLOYMENTFREEZE
+- resource_type: DELEGATECONFIGURATION
+- resource_type: SECRET
+- resource_type: DELEGATE
+- resource_type: CONNECTOR
+  attribute_filter:
+  - attribute_name: category
+    attribute_values:
+    - CODE_REPO
+    - ARTIFACTORY
+    - CLOUD_PROVIDER
+    - CLOUD_COST
+    - MONITORING
+    - TICKETING
+### SERVICE RELIABILITY
+- resource_type: SLO
+- resource_type: MONITOREDSERVICE
+### PIPELINE
+- resource_type: PIPELINE
+### SERVICE
+- resource_type: SERVICE

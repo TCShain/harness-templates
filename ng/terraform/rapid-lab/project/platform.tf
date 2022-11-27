@@ -5,6 +5,7 @@ resource "harness_platform_project" "rapid_project" {
   description = "Rapid Lab Harness Template Project"
   tags        = var.rapid_lab_tags
 
+
 }
 
 # module "secrets" {
