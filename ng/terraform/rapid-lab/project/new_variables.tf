@@ -76,18 +76,6 @@ variable "secrets" {
 }
 
 # RBAC Variables
-## RESOURCE_GROUP Variables
-# variable "resource_groups" {
-# }
-
-# variable "rg_type_sets" {
-#   type = list(string)
-#   default = [
-#     "shared",
-#     "gitops"
-#   ]
-# }
-
 ## USER_GROUP Variables
 variable "user_groups" {
 }
