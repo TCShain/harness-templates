@@ -83,7 +83,8 @@ variable "rg_type_set_map" {
       "DEPLOYMENTFREEZE",
       "DELEGATECONFIGURATION",
       "SECRET",
-      "DELEGATE"
+      "DELEGATE",
+      "CONNECTOR"
     ],
     "SERVICE_RELIABILITY" = [
       "SLO",
