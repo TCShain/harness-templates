@@ -1,10 +1,10 @@
-resource "harness_platform_resource_group" "rapid_resource_group" {
+resource "harness_platform_resource_group" "reference_resource_group" {
   for_each = {for rg in var.resource_groups : rg.name => rg}
 
   identifier  = each.value.name
   name        = each.value.name
   description = each.value.description
-  tags        = var.rapid_lab_tags
+  tags        = var.reference_lab_tags
 
   org_id     = var.org_name
   project_id = var.project_name

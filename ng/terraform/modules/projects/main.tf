@@ -3,7 +3,7 @@ resource "random_shuffle" "color" {
   result_count = 1
 }
 
-resource "harness_platform_project" "rapid_project" {
+resource "harness_platform_project" "reference_project" {
   org_id      = var.org_name
   name        = var.project_name    
   identifier  = var.project_name

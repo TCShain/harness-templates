@@ -28,9 +28,9 @@ variable "level" {
   type = string
 }
 
-variable "rapid_lab_tags" {
+variable "reference_lab_tags" {
   type    = list(string)
-  default = ["harness_template:rapid_lab"]
+  default = ["harness_template:reference_lab"]
 }
 
 ## ENVIRONMENT Variables
@@ -52,7 +52,7 @@ variable "connectors" {
         "credentials": "account."
     },
     "source_repository": {
-        "name": "rapid_lab_env_2",
+        "name": "reference_lab_env_2",
         "type": "Production"
     }
   }
@@ -69,7 +69,7 @@ variable "secrets" {
         "credentials": "account."
     },
     "two": {
-        "name": "rapid_lab_env_2",
+        "name": "reference_lab_env_2",
         "type": "Production"
     }
   }

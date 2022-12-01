@@ -1,11 +1,11 @@
-resource "harness_platform_usergroup" "rapid_user_group" {
+resource "harness_platform_usergroup" "reference_user_group" {
   for_each = {for ug in var.user_groups: ug.name => ug }
   
   identifier = each.value.name
   name       = each.value.name
   org_id     = var.org_name == "" ? null : var.org_name
   project_id = var.project_name == "" ? null : var.project_name
-  tags       = var.rapid_lab_tags
+  tags       = var.reference_lab_tags
 
   linked_sso_display_name = each.value.linked_sso_display_name
   sso_group_id            = each.value.sso_group_name

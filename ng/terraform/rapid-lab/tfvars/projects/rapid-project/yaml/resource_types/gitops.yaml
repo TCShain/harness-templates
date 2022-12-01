@@ -1,6 +1,0 @@
-- resource_type: GITOPS_CLUSTER
-- resource_type: GITOPS_AGENT
-- resource_type: GITOPS_CERT
-- resource_type: GITOPS_APP
-- resource_type: GITOPS_REPOSITORY
-- resource_type: GITOPS_GPGKEY

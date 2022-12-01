@@ -1,4 +1,4 @@
-resource "harness_platform_role_assignments" "rapid_role_assignment" {
+resource "harness_platform_role_assignments" "reference_role_assignment" {
   for_each = {for ra in var.role_assignments: ra.identifier => ra}
 
   #identifier                = each.value.identifier

@@ -1,28 +1,28 @@
 ## TOP-LEVEL Variables
 variable "org_name" {
   type    = string
-  default = "rapid_org"
+  default = "reference_org"
 }
 
 variable "project_name" {
   type    = string
-  default = "rapid_project"
+  default = "reference_project"
 }
 
-variable "rapid_lab_tags" {
+variable "reference_lab_tags" {
   type    = list(string)
-  default = ["harness_template:rapid_lab"]
+  default = ["harness_template:reference_lab"]
 }
 
 ## ENVIRONMENT Variables
 variable "environments" {
   default = {
     "one": {
-        "name": "rapid_lab_env_1",
+        "name": "reference_lab_env_1",
         "type": "PreProduction"
     },
     "two": {
-        "name": "rapid_lab_env_2",
+        "name": "reference_lab_env_2",
         "type": "Production"
     }
   }

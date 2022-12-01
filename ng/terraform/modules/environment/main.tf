@@ -1,4 +1,4 @@
-resource "harness_platform_environment" "rapid_environment" {
+resource "harness_platform_environment" "reference_environment" {
   for_each = {for env in var.environments: env.name => env}
 
   name        = each.value.name
@@ -7,6 +7,6 @@ resource "harness_platform_environment" "rapid_environment" {
   project_id  = var.project_name
   type        = each.value.type
   description = "Rapid Lab Harness Template Environment"
-  tags        = var.rapid_lab_tags
+  tags        = var.reference_lab_tags
   
 }
