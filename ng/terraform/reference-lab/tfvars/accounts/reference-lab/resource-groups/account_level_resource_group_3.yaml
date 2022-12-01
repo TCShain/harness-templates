@@ -1,20 +1,23 @@
 ---
-name: rg_ts_experiments2
+name: rg_ts_experiments3
 scope_filter: INCLUDING_CHILD_SCOPES
 ## Toggle all Resource Types in a set
 resource_sets:
-- "CHAOS"
+- "SHARED_RESOURCES"
 - "PIPELINES"
+- "SERVICES"
 ## Toggle individual Resource Types, or Resource Types with Attribute Filters/Identifier List 
 resources:
-- resource_type: ENVIRONMENT
-  attribute_filter:
-  - attribute_name: type
-    attribute_values:
-    - PreProduction
+### EXAMPLE: Attribute Filter
 - resource_type: CONNECTOR
   attribute_filter:
   - attribute_name: category
     attribute_values:
     - CODE_REPO
     - ARTIFACTORY
+### EXAMPLE: Identifier
+- resource_type: ENVIRONMENT
+  attribute_filter:
+  - attribute_name: type
+    attribute_values:
+    - PreProduction

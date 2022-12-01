@@ -9,9 +9,9 @@ variable "project_name" {
   default = ""
 }
 
-variable "rapid_lab_tags" {
+variable "reference_lab_tags" {
   type    = list(string)
-  default = ["harness_template:rapid_lab"]
+  default = ["harness_template:reference_lab"]
 }
 
 variable "account_id" {
@@ -19,9 +19,9 @@ variable "account_id" {
   default = ""
 }
 
-variable "level" {
-  type = string
-}
+# variable "level" {
+#   type = string
+# }
 
 # RESOURCE_GROUP Variables
 variable "resource_groups" {

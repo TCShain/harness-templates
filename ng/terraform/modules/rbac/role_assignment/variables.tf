@@ -1,17 +1,17 @@
 ## TOP-LEVEL Variables
 variable "org_name" {
   type    = string
-  default = "rapid_org"
+  default = "reference_org"
 }
 
 variable "project_name" {
   type    = string
-  default = "rapid_project"
+  default = "reference_project"
 }
 
-variable "rapid_lab_tags" {
+variable "reference_lab_tags" {
   type    = list(string)
-  default = ["harness_template:rapid_lab"]
+  default = ["harness_template:reference_lab"]
 }
 
 variable "account_id" {

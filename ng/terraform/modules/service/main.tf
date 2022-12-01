@@ -1,4 +1,4 @@
-resource "harness_platform_service" "rapid_service" {
+resource "harness_platform_service" "reference_service" {
   for_each = {for svc in var.services: svc.name => svc}
 
   name        = each.value.name
@@ -6,7 +6,7 @@ resource "harness_platform_service" "rapid_service" {
   org_id      = var.org_name
   project_id  = var.project_name
   description = "Harness Service"
-  tags        = var.rapid_lab_tags
+  tags        = var.reference_lab_tags
 
   yaml = templatefile("${path.module}/svc_templates/${each.value.svc_type}_svc.tftpl",
     {
