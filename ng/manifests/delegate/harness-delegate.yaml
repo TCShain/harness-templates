@@ -58,7 +58,7 @@ spec:
       terminationGracePeriodSeconds: 600
       restartPolicy: Always
       containers:
-      - image: <+artifact.image>
+      - image: {{.Values.image}}
         imagePullPolicy: Always
         name: delegate
         securityContext:
