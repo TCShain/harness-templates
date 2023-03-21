@@ -3,6 +3,7 @@ replicas: 1
 
 delegateNamespace: <+infra.namespace>
 delegateToken: <+secrets.getValue("sampleproject1_delegate_token>")>
+#may just turn this dynamic variable reference into a pipeline/stage variable, then pass/set it through an input set
 
 image: <+artifact.image>
 
