@@ -2,7 +2,7 @@ name: <+service.name>-<+infra.name>
 replicas: 1
 
 delegateNamespace: <+infra.namespace>
-delegateToken: <+secrets.getValue("<+infrastructureDefinition.identifier>_delegate_token>")>
+delegateToken: <+secrets.getValue("sampleproject1_delegate_token>")>
 
 image: <+artifact.image>
 
