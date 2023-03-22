@@ -1,18 +1,18 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: {{.Values.delegateNamespace}}
+  name: {{.Values.namespace}}
 
 ---
 
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: {{.Values.name}}-cluster-admin
+  name: {{.Values.namespace}}-cluster-admin
 subjects:
   - kind: ServiceAccount
     name: default
-    namespace: {{.Values.delegateNamespace}}
+    namespace: {{.Values.namespace}}
 roleRef:
   kind: ClusterRole
   name: cluster-admin
@@ -23,8 +23,8 @@ roleRef:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: kubernetes-delegate-account-token
-  namespace: {{.Values.delegateNamespace}}
+  name: {{.Values.name}}-account-token
+  namespace: {{.Values.namespace}}
 type: Opaque
 data:
   DELEGATE_TOKEN: {{.Values.delegateToken}}
@@ -38,18 +38,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    harness.io/name: kubernetes-delegate
-  name: kubernetes-delegate
-  namespace: {{.Values.delegateNamespace}}
+    harness.io/name: {{.Values.name}}
+  name: {{.Values.name}}
+  namespace: {{.Values.namespace}}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      harness.io/name: kubernetes-delegate
+      harness.io/name: {{.Values.name}}
   template:
     metadata:
       labels:
-        harness.io/name: kubernetes-delegate
+        harness.io/name: {{.Values.name}}
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "3460"
@@ -90,7 +90,7 @@ spec:
           failureThreshold: 15
         envFrom:
         - secretRef:
-            name: kubernetes-delegate-account-token
+            name: {{.Values.name}}-account-token
         env:
         - name: JAVA_OPTS
           value: "-Xms64M"
@@ -101,7 +101,7 @@ spec:
         - name: DEPLOY_MODE
           value: KUBERNETES
         - name: DELEGATE_NAME
-          value: kubernetes-delegate
+          value: {{.Values.name}}
         - name: DELEGATE_TYPE
           value: "KUBERNETES"
         - name: DELEGATE_NAMESPACE
@@ -127,11 +127,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: delegate-service
-  namespace: {{.Values.delegateNamespace}}
+  namespace: {{.Values.namespace}}
 spec:
   type: ClusterIP
   selector:
-    harness.io/name: kubernetes-delegate
+    harness.io/name: {{.Values.name}}
   ports:
     - port: 8080
 
@@ -141,7 +141,7 @@ kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: upgrader-cronjob
-  namespace: {{.Values.delegateNamespace}}
+  namespace: {{.Values.namespace}}
 rules:
   - apiGroups: ["batch", "apps", "extensions"]
     resources: ["cronjobs"]
@@ -155,12 +155,12 @@ rules:
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: kubernetes-delegate-upgrader-cronjob
-  namespace: {{.Values.delegateNamespace}}
+  name: {{.Values.name}}-upgrader-cronjob
+  namespace: {{.Values.namespace}}
 subjects:
   - kind: ServiceAccount
     name: upgrader-cronjob-sa
-    namespace: {{.Values.delegateNamespace}}
+    namespace: {{.Values.namespace}}
 roleRef:
   kind: Role
   name: upgrader-cronjob
@@ -172,15 +172,15 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: upgrader-cronjob-sa
-  namespace: {{.Values.delegateNamespace}}
+  namespace: {{.Values.namespace}}
 
 ---
 
 apiVersion: v1
 kind: Secret
 metadata:
-  name: kubernetes-delegate-upgrader-token
-  namespace: {{.Values.delegateNamespace}}
+  name: {{.Values.name}}-upgrader-token
+  namespace: {{.Values.namespace}}
 type: Opaque
 data:
   UPGRADER_TOKEN: {{.Values.delegateToken}}
@@ -190,17 +190,17 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: kubernetes-delegate-upgrader-config
-  namespace: {{.Values.delegateNamespace}}
+  name: {{.Values.name}}-upgrader-config
+  namespace: {{.Values.namespace}}
 data:
   config.yaml: |
     mode: Delegate
     dryRun: false
-    workloadName: kubernetes-delegate
-    namespace: {{.Values.delegateNamespace}}
+    workloadName: {{.Values.name}}
+    namespace: {{.Values.namespace}}
     containerName: delegate
     delegateConfig:
-      accountId: wh9664eQQpKR0oedqRfBUA
+      accountId: {{.Values.harnessAccountId}}
       managerHost: https://app.harness.io/gratis
 
 ---
@@ -209,9 +209,9 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   labels:
-    harness.io/name: kubernetes-delegate-upgrader-job
-  name: kubernetes-delegate-upgrader-job
-  namespace: {{.Values.delegateNamespace}}
+    harness.io/name: {{.Values.name}}-upgrader-job
+  name: {{.Values.name}}-upgrader-job
+  namespace: {{.Values.namespace}}
 spec:
   schedule: "0 */1 * * *"
   concurrencyPolicy: Forbid
@@ -228,11 +228,11 @@ spec:
             imagePullPolicy: Always
             envFrom:
             - secretRef:
-                name: kubernetes-delegate-upgrader-token
+                name: {{.Values.name}}-upgrader-token
             volumeMounts:
               - name: config-volume
                 mountPath: /etc/config
           volumes:
             - name: config-volume
               configMap:
-                name: kubernetes-delegate-upgrader-config
+                name: {{.Values.name}}-upgrader-config

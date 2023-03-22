@@ -1,11 +1,13 @@
-name: <+service.name>-<+infra.name>
-replicas: 1
+harnessAccountId: <+account.identifier>
 
-delegateNamespace: <+infra.namespace>
+name: delegate-factory-demo
+#name: <+service.name>-<+infra.name>
+
+namespace: <+infra.namespace>
+replicas: <+pipeline.variables.delegate_replica_count>
+
 delegateToken: <+secrets.getValue("sampleproject1_delegate_token")>
 #delegateToken: <!+secrets.getValue("<!+infra.identifier>_delegate_token")>
 #may just turn this dynamic variable reference into a pipeline/stage variable, then pass/set it through an input set
 
 image: <+artifact.image>
-
-harnessAccountId: wh9664eQQpKR0oedqRfBUA
