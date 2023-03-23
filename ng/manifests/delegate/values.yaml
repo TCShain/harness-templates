@@ -6,7 +6,7 @@ name: delegate-factory-demo
 namespace: <+infra.namespace>
 replicas: <+pipeline.variables.delegate_replica_count>
 
-delegateToken: <+secrets.getValue("<+pipeline.variables.delegateToken>")>
+delegateToken: <+secrets.getValue("<+env.name>")>
 #delegateToken: <!+secrets.getValue("<!+infra.identifier>_delegate_token")>
 #may just turn this dynamic variable reference into a pipeline/stage variable, then pass/set it through an input set
 
