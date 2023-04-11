@@ -57,7 +57,7 @@ pipeline:
                   timeout: 1d
               - step:
                   type: TerraformApply
-                  name: TerraformApply_1
+                  name: Apply
                   identifier: TerraformApply_1
                   spec:
                     provisionerIdentifier: s3_bucket_deploy
