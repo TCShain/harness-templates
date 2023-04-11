@@ -41,6 +41,29 @@ pipeline:
                             type: Inline
                       secretManagerRef: harnessSecretManager
                   timeout: 10m
+              - step:
+                  type: HarnessApproval
+                  name: Approval
+                  identifier: Approval
+                  spec:
+                    approvalMessage: Please review the following information and approve the pipeline progression
+                    includePipelineExecutionHistory: true
+                    approvers:
+                      userGroups:
+                        - account.Admins
+                      minimumCount: 1
+                      disallowPipelineExecutor: false
+                    approverInputs: []
+                  timeout: 1d
+              - step:
+                  type: TerraformApply
+                  name: TerraformApply_1
+                  identifier: TerraformApply_1
+                  spec:
+                    provisionerIdentifier: s3_bucket_deploy
+                    configuration:
+                      type: InheritFromPlan
+                  timeout: 10m
         tags: {}
         variables:
           - name: aws_region
