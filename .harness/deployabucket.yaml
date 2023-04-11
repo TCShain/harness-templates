@@ -30,6 +30,20 @@ pipeline:
                             branch: main
                             folderPath: aws/terraform/tfstate
                           type: Github
+                      varFiles:
+                        - varFile:
+                            spec:
+                              content: |
+                                aws_access_key = "AKIAYMVTY65Q675WRUWN"
+                                aws_secret_key = "<+secrets.getValue("account.control_aws_secret_key")>"
+                                region         = "<+stage.variables.aws_region>"
+                            identifier: tf_provider_creds
+                            type: Inline
                       secretManagerRef: harnessSecretManager
                   timeout: 10m
         tags: {}
+        variables:
+          - name: aws_region
+            type: String
+            description: ""
+            value: us-east-1
