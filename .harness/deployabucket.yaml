@@ -72,7 +72,7 @@ pipeline:
                                         repoName: harness-templates
                                         branch: tf-pipeline-demo
                                         paths:
-                                          - terraform/aws/default.tfvars.safe
+                                          - aws/terraform/default.tfvars.safe
                                         connectorRef: account.TCShain_GitHub
                             secretManagerRef: harnessSecretManager
                             skipRefreshCommand: false
