@@ -14,6 +14,21 @@ pipeline:
           execution:
             steps:
               - step:
+                  type: Http
+                  name: Open Pull Request
+                  identifier: Open_Pull_Request
+                  spec:
+                    url: https://github.com/TCShain/harness-templates
+                    method: PUT
+                    headers: []
+                    outputVariables: []
+                    requestBody: open pr here
+                  timeout: 10s
+                  when:
+                    stageStatus: Success
+                    condition: "false"
+                  failureStrategies: []
+              - step:
                   type: JiraCreate
                   name: Create Jira Ticket
                   identifier: Create_Jira_Ticket
@@ -195,6 +210,17 @@ pipeline:
                     stageStatus: Success
                     condition: "false"
                   failureStrategies: []
+              - step:
+                  type: Http
+                  name: Update Pull Request
+                  identifier: Update_Pull_Request
+                  spec:
+                    url: https://github.com/TCShain/harness-templates
+                    method: GET
+                    headers: []
+                    outputVariables: []
+                    requestBody: update pr
+                  timeout: 10s
         tags: {}
         variables:
           - name: aws_region
