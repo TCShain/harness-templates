@@ -116,6 +116,11 @@ pipeline:
                           configuration:
                             type: InheritFromPlan
                         timeout: 10m
+                  when:
+                    stageStatus: Success
+                    condition: <+stage.variables.tf_destroy> == true
+                  failureStrategies: []
+                  spec: {}
         tags: {}
         variables:
           - name: aws_region
