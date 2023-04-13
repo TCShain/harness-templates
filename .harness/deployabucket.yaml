@@ -22,7 +22,7 @@ pipeline:
                         name: TF Plan
                         identifier: TF_Plan
                         spec:
-                          provisionerIdentifier: tf_apply_plan
+                          provisionerIdentifier: s3_bucket_deploy
                           configuration:
                             command: Apply
                             configFiles:
@@ -65,7 +65,7 @@ pipeline:
                         name: Terraform Apply
                         identifier: Terraform_Apply
                         spec:
-                          provisionerIdentifier: tf_apply_plan
+                          provisionerIdentifier: s3_bucket_deploy
                           configuration:
                             type: InheritFromPlan
                         timeout: 10m
