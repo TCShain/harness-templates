@@ -175,6 +175,20 @@ pipeline:
                     condition: <+stage.variables.tf_destroy> == true
                   failureStrategies: []
                   spec: {}
+              - step:
+                  type: ShellScript
+                  name: ShellScript_1
+                  identifier: ShellScript_1
+                  spec:
+                    shell: Bash
+                    onDelegate: true
+                    source:
+                      type: Inline
+                      spec:
+                        script: test
+                    environmentVariables: []
+                    outputVariables: []
+                  timeout: 10m
         tags: {}
         variables:
           - name: aws_region
