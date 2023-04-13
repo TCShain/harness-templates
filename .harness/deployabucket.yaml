@@ -19,7 +19,7 @@ pipeline:
                   steps:
                     - step:
                         type: TerraformPlan
-                        name: TF Plan
+                        name: TF Apply Plan
                         identifier: TF_Plan
                         spec:
                           provisionerIdentifier: s3_bucket_deploy
@@ -31,8 +31,8 @@ pipeline:
                                   connectorRef: account.TCShain_GitHub
                                   repoName: harness-templates
                                   gitFetchType: Branch
-                                  branch: main
-                                  folderPath: aws/terraform/tfstate
+                                  branch: tf-pipeline-demo
+                                  folderPath: aws/terraform/<+stage.variables.tf_infra_type>
                                 type: Github
                             varFiles:
                               - varFile:
@@ -43,6 +43,19 @@ pipeline:
                                       region         = "<+stage.variables.aws_region>"
                                   identifier: tf_provider_creds
                                   type: Inline
+                              - varFile:
+                                  type: Remote
+                                  identifier: default vars
+                                  spec:
+                                    store:
+                                      type: Github
+                                      spec:
+                                        gitFetchType: Branch
+                                        repoName: harness-templates
+                                        branch: tf-pipeline-demo
+                                        paths:
+                                          - terraform/aws/default.tfvars
+                                        connectorRef: account.TCShain_GitHub
                             secretManagerRef: harnessSecretManager
                             skipRefreshCommand: false
                         timeout: 10m
