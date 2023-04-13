@@ -78,7 +78,6 @@ pipeline:
                         name: TF Destroy Plan
                         identifier: TF_Destroy_Plan
                         spec:
-                          provisionerIdentifier: <+stage.variables.aws_region>_<+project.identifier>_<+stage.variables.tf_infra_type>
                           configuration:
                             command: Destroy
                             configFiles:
@@ -92,7 +91,22 @@ pipeline:
                                 type: Github
                             secretManagerRef: account.harnessSecretManager
                             skipRefreshCommand: false
+                          provisionerIdentifier: s3_deply_bucket
                         timeout: 10m
+                    - step:
+                        type: HarnessApproval
+                        name: Destroy Approval
+                        identifier: Destroy_Approval
+                        spec:
+                          approvalMessage: Please review the following information and approve the pipeline progression
+                          includePipelineExecutionHistory: true
+                          approvers:
+                            userGroups:
+                              - account.Admins
+                            minimumCount: 1
+                            disallowPipelineExecutor: false
+                          approverInputs: []
+                        timeout: 1d
         tags: {}
         variables:
           - name: aws_region
