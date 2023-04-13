@@ -55,7 +55,7 @@ pipeline:
                         name: TF Apply Plan
                         identifier: TF_Plan
                         spec:
-                          provisionerIdentifier: <+project.identifier>_<+stage.variables.tf_infra_type>
+                          provisionerIdentifier: <+project.identifier>_<+stage.variables.tf_infra_type>_<+stage.variables.team_name>
                           configuration:
                             command: Apply
                             configFiles:
@@ -111,7 +111,7 @@ pipeline:
                         name: Terraform Apply
                         identifier: Terraform_Apply
                         spec:
-                          provisionerIdentifier: <+project.identifier>_<+stage.variables.tf_infra_type>
+                          provisionerIdentifier: <+project.identifier>_<+stage.variables.tf_infra_type>_<+stage.variables.team_name>
                           configuration:
                             type: InheritFromPlan
                         timeout: 10m
@@ -164,7 +164,7 @@ pipeline:
                                         connectorRef: account.TCShain_GitHub
                             secretManagerRef: account.harnessSecretManager
                             skipRefreshCommand: false
-                          provisionerIdentifier: <+project.identifier>_<+stage.variables.tf_infra_type>
+                          provisionerIdentifier: <+project.identifier>_<+stage.variables.tf_infra_type>_<+stage.variables.team_name>
                         timeout: 10m
                     - step:
                         type: HarnessApproval
@@ -185,7 +185,7 @@ pipeline:
                         name: TF Destroy
                         identifier: TF_Destroy
                         spec:
-                          provisionerIdentifier: <+project.identifier>_<+stage.variables.tf_infra_type>
+                          provisionerIdentifier: <+project.identifier>_<+stage.variables.tf_infra_type>_<+stage.variables.team_name>
                           configuration:
                             type: InheritFromPlan
                         timeout: 10m
