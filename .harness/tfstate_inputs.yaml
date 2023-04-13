@@ -1,0 +1,18 @@
+inputSet:
+  name: tfstate_inputs
+  identifier: tfstate_inputs
+  orgIdentifier: default
+  projectIdentifier: sampleproject1
+  pipeline:
+    identifier: deployabucket
+    stages:
+      - stage:
+          identifier: deploy_s3_bucket
+          type: Custom
+          variables:
+            - name: tf_destroy
+              type: String
+              value: "false"
+            - name: tf_infra_type
+              type: String
+              value: tfstate
