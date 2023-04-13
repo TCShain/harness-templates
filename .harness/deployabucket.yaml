@@ -75,3 +75,8 @@ pipeline:
             type: String
             description: ""
             value: us-east-1
+          - name: tf_destroy
+            type: String
+            default: "false"
+            description: ""
+            value: <+input>.allowedValues(false,true)
