@@ -54,7 +54,7 @@ pipeline:
                                         repoName: harness-templates
                                         branch: tf-pipeline-demo
                                         paths:
-                                          - terraform/aws/default.tfvars
+                                          - terraform/aws/default.tfvars.safe
                                         connectorRef: account.TCShain_GitHub
                             secretManagerRef: harnessSecretManager
                             skipRefreshCommand: false
@@ -119,7 +119,7 @@ pipeline:
                                         repoName: harness-templates
                                         branch: tf-pipeline-demo
                                         paths:
-                                          - aws/terraform/default.tfvars
+                                          - aws/terraform/default.tfvars.safe
                                         connectorRef: account.TCShain_GitHub
                             secretManagerRef: account.harnessSecretManager
                             skipRefreshCommand: false
