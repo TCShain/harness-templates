@@ -20,12 +20,12 @@ pipeline:
                   spec:
                     connectorRef: account.jira_bootup
                     projectKey: CLD
-                    issueType: Change Request
+                    issueType: Task
                     fields:
                       - name: Reporter
                         value: taylor@bootup.sh
                       - name: Summary
-                        value: <+pipeline.executionUrl>
+                        value: asdfa
                   timeout: 10m
               - stepGroup:
                   name: Terrform APPLY
