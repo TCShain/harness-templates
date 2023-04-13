@@ -13,34 +13,38 @@ pipeline:
         spec:
           execution:
             steps:
-              - step:
-                  type: TerraformPlan
-                  name: TF Plan
-                  identifier: TF_Plan
-                  spec:
-                    provisionerIdentifier: s3_bucket_deploy
-                    configuration:
-                      command: Apply
-                      configFiles:
-                        store:
-                          spec:
-                            connectorRef: account.TCShain_GitHub
-                            repoName: harness-templates
-                            gitFetchType: Branch
-                            branch: main
-                            folderPath: aws/terraform/tfstate
-                          type: Github
-                      varFiles:
-                        - varFile:
-                            spec:
-                              content: |
-                                aws_access_key = "AKIAYMVTY65Q675WRUWN"
-                                aws_secret_key = "<+secrets.getValue("account.control_aws_secret_key")>"
-                                region         = "<+stage.variables.aws_region>"
-                            identifier: tf_provider_creds
-                            type: Inline
-                      secretManagerRef: harnessSecretManager
-                  timeout: 10m
+              - stepGroup:
+                  name: Terrform APPLY
+                  identifier: Terrform_APPLY
+                  steps:
+                    - step:
+                        type: TerraformPlan
+                        name: TF Plan
+                        identifier: TF_Plan
+                        spec:
+                          provisionerIdentifier: s3_bucket_deploy
+                          configuration:
+                            command: Apply
+                            configFiles:
+                              store:
+                                spec:
+                                  connectorRef: account.TCShain_GitHub
+                                  repoName: harness-templates
+                                  gitFetchType: Branch
+                                  branch: main
+                                  folderPath: aws/terraform/tfstate
+                                type: Github
+                            varFiles:
+                              - varFile:
+                                  spec:
+                                    content: |
+                                      aws_access_key = "AKIAYMVTY65Q675WRUWN"
+                                      aws_secret_key = "<+secrets.getValue("account.control_aws_secret_key")>"
+                                      region         = "<+stage.variables.aws_region>"
+                                  identifier: tf_provider_creds
+                                  type: Inline
+                            secretManagerRef: harnessSecretManager
+                        timeout: 10m
               - step:
                   type: HarnessApproval
                   name: Approval
@@ -55,26 +59,6 @@ pipeline:
                       disallowPipelineExecutor: false
                     approverInputs: []
                   timeout: 1d
-              - stepGroup:
-                  name: Terraform APPLY
-                  identifier: Terraform_APPLY
-                  steps:
-                    - step:
-                        type: TerraformApply
-                        name: Apply
-                        identifier: TerraformApply_1
-                        spec:
-                          provisionerIdentifier: s3_bucket_deploy
-                          configuration:
-                            type: InheritFromPlan
-                        timeout: 10m
-                  failureStrategies:
-                    - onFailure:
-                        errors:
-                          - AllErrors
-                        action:
-                          type: MarkAsFailure
-                  spec: {}
         tags: {}
         variables:
           - name: aws_region
