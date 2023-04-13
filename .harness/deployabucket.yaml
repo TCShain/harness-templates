@@ -202,3 +202,24 @@ pipeline:
             type: String
             description: ""
             value: <+input>.allowedValues(ecs,lambda,s3,tfstate)
+  notificationRules:
+    - name: Dynamic Notifications
+      identifier: Dynamic_Notifications
+      pipelineEvents:
+        - type: AllEvents
+        - type: PipelineStart
+        - type: PipelineEnd
+        - type: PipelineSuccess
+        - type: PipelineFailed
+        - type: PipelinePaused
+        - type: StageFailed
+        - type: StageSuccess
+        - type: StageStart
+        - type: StepFailed
+      notificationMethod:
+        type: Email
+        spec:
+          userGroups:
+            - account.power_user_group
+          recipients: []
+      enabled: true
