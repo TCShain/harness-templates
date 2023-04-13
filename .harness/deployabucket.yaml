@@ -69,6 +69,11 @@ pipeline:
                           configuration:
                             type: InheritFromPlan
                         timeout: 10m
+                  when:
+                    stageStatus: Success
+                    condition: <+stage.variables.tf_destroy> == false
+                  failureStrategies: []
+                  spec: {}
               - stepGroup:
                   name: Terraform DESTROY
                   identifier: Terraform_DESTROY
