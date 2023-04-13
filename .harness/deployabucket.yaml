@@ -109,6 +109,14 @@ pipeline:
                                 type: Github
                             varFiles:
                               - varFile:
+                                  spec:
+                                    content: |
+                                      aws_access_key = "AKIAYMVTY65Q675WRUWN"
+                                      aws_secret_key = "<+secrets.getValue("account.control_aws_secret_key")>"
+                                      region         = "<+stage.variables.aws_region>"
+                                  identifier: tf_provider_creds
+                                  type: Inline
+                              - varFile:
                                   type: Remote
                                   identifier: default variables
                                   spec:
