@@ -71,7 +71,7 @@ pipeline:
                         timeout: 10m
                   when:
                     stageStatus: Success
-                    condition: <+stage.variables.tf_destroy> != false
+                    condition: <+stage.variables.tf_destroy> != true
                   failureStrategies: []
                   spec: {}
               - stepGroup:
