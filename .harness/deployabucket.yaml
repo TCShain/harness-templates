@@ -1,12 +1,12 @@
 pipeline:
-  name: deploy-a-bucket
+  name: tf-pipeline-demo
   identifier: deployabucket
   projectIdentifier: sampleproject1
   orgIdentifier: default
   tags: {}
   stages:
     - stage:
-        name: deploy s3 bucket
+        name: Terraform Stage
         identifier: deploy_s3_bucket
         description: ""
         type: Custom
@@ -176,18 +176,16 @@ pipeline:
                   failureStrategies: []
                   spec: {}
               - step:
-                  type: ShellScript
-                  name: ShellScript_1
-                  identifier: ShellScript_1
+                  type: JiraUpdate
+                  name: Update Jira Ticket
+                  identifier: Update_Jira_Ticket
                   spec:
-                    shell: Bash
-                    onDelegate: true
-                    source:
-                      type: Inline
-                      spec:
-                        script: test
-                    environmentVariables: []
-                    outputVariables: []
+                    connectorRef: account.jira_bootup
+                    issueKey: <+execution.steps.Create_Jira_Ticket.identifier>
+                    transitionTo:
+                      transitionName: ""
+                      status: <+stage.variables.tf_execution_result>
+                    fields: []
                   timeout: 10m
         tags: {}
         variables:
