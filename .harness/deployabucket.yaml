@@ -29,7 +29,7 @@ pipeline:
                   timeout: 10m
                   when:
                     stageStatus: Success
-                    condition: "true"
+                    condition: "false"
                   failureStrategies: []
               - stepGroup:
                   name: Terrform APPLY
@@ -193,7 +193,7 @@ pipeline:
                   timeout: 10m
                   when:
                     stageStatus: Success
-                    condition: "true"
+                    condition: "false"
                   failureStrategies: []
         tags: {}
         variables:
