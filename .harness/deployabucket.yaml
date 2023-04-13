@@ -68,6 +68,13 @@ pipeline:
                           configuration:
                             type: InheritFromPlan
                         timeout: 10m
+                  failureStrategies:
+                    - onFailure:
+                        errors:
+                          - AllErrors
+                        action:
+                          type: MarkAsFailure
+                  spec: {}
         tags: {}
         variables:
           - name: aws_region
