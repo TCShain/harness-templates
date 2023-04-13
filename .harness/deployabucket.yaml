@@ -107,6 +107,20 @@ pipeline:
                                   branch: tf-pipeline-demo
                                   folderPath: aws/terraform/<+stage.variables.tf_infra_type>
                                 type: Github
+                            varFiles:
+                              - varFile:
+                                  type: Remote
+                                  identifier: default variables
+                                  spec:
+                                    store:
+                                      type: Github
+                                      spec:
+                                        gitFetchType: Branch
+                                        repoName: harness-templates
+                                        branch: tf-pipeline-demo
+                                        paths:
+                                          - aws/terraform/default.tfvars
+                                        connectorRef: account.TCShain_GitHub
                             secretManagerRef: account.harnessSecretManager
                             skipRefreshCommand: false
                           provisionerIdentifier: s3_bucket_deploy
