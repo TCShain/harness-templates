@@ -236,6 +236,10 @@ pipeline:
             type: String
             description: ""
             value: <+input>.allowedValues(ecs,lambda,s3,tfstate)
+          - name: team_name
+            type: String
+            description: ""
+            value: <+input>.allowedValues(team1,team2)
   notificationRules:
     - name: Dynamic Notifications
       identifier: Dynamic_Notifications
