@@ -55,15 +55,19 @@ pipeline:
                       disallowPipelineExecutor: false
                     approverInputs: []
                   timeout: 1d
-              - step:
-                  type: TerraformApply
-                  name: Apply
-                  identifier: TerraformApply_1
-                  spec:
-                    provisionerIdentifier: s3_bucket_deploy
-                    configuration:
-                      type: InheritFromPlan
-                  timeout: 10m
+              - stepGroup:
+                  name: Terraform APPLY
+                  identifier: Terraform_APPLY
+                  steps:
+                    - step:
+                        type: TerraformApply
+                        name: Apply
+                        identifier: TerraformApply_1
+                        spec:
+                          provisionerIdentifier: s3_bucket_deploy
+                          configuration:
+                            type: InheritFromPlan
+                        timeout: 10m
         tags: {}
         variables:
           - name: aws_region
