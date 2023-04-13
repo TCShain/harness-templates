@@ -69,6 +69,30 @@ pipeline:
                           configuration:
                             type: InheritFromPlan
                         timeout: 10m
+              - stepGroup:
+                  name: Terraform DESTROY
+                  identifier: Terraform_DESTROY
+                  steps:
+                    - step:
+                        type: TerraformPlan
+                        name: TF Destroy Plan
+                        identifier: TF_Destroy_Plan
+                        spec:
+                          provisionerIdentifier: <+stage.variables.aws_region>_<+project.identifier>_<+stage.variables.tf_infra_type>
+                          configuration:
+                            command: Destroy
+                            configFiles:
+                              store:
+                                spec:
+                                  connectorRef: account.TCShain_GitHub
+                                  repoName: harness-templates
+                                  gitFetchType: Branch
+                                  branch: tf-pipeline-demo
+                                  folderPath: aws/terraform/<+stage.variables.tf_infra_type>
+                                type: Github
+                            secretManagerRef: account.harnessSecretManager
+                            skipRefreshCommand: false
+                        timeout: 10m
         tags: {}
         variables:
           - name: aws_region
