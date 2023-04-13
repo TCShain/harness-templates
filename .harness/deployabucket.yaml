@@ -13,6 +13,20 @@ pipeline:
         spec:
           execution:
             steps:
+              - step:
+                  type: JiraCreate
+                  name: Create Jira Ticket
+                  identifier: Create_Jira_Ticket
+                  spec:
+                    connectorRef: account.jira_bootup
+                    projectKey: CLD
+                    issueType: Change Request
+                    fields:
+                      - name: Reporter
+                        value: taylor@bootup.sh
+                      - name: Summary
+                        value: <+pipeline.executionUrl>
+                  timeout: 10m
               - stepGroup:
                   name: Terrform APPLY
                   identifier: Terrform_APPLY
