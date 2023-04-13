@@ -104,3 +104,7 @@ pipeline:
             default: "false"
             description: ""
             value: <+input>.allowedValues(false,true)
+          - name: tf_infra_type
+            type: String
+            description: ""
+            value: <+input>.allowedValues(ecs,lambda,s3,tfstate)
