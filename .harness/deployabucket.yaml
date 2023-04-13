@@ -152,7 +152,7 @@ pipeline:
                         name: TF Destroy
                         identifier: TF_Destroy
                         spec:
-                          provisionerIdentifier: s3_bucket_deply
+                          provisionerIdentifier: s3_bucket_deploy
                           configuration:
                             type: InheritFromPlan
                         timeout: 10m
